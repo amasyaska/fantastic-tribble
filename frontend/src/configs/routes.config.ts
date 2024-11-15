@@ -7,6 +7,7 @@ class Routes {
 		LOGIN: `${this.authScope}login`,
 		REGISTRATION: `${this.authScope}registration`,
 	}
+	COMPONENTS = `${this.homeScope}components`
 }
 
 export const ROUTES = new Routes()

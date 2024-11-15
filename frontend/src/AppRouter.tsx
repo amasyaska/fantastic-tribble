@@ -1,6 +1,7 @@
 import { ROUTES } from '@configs/routes.config'
 import { LoginPage } from '@pages/auth/login/LoginPage'
 import { RegistrationPage } from '@pages/auth/registration/RegistrationPage'
+import { ComponentsPage } from '@pages/components/ComponentsPage'
 import { HomePage } from '@pages/home/HomePage'
 import {
 	Navigate,
@@ -14,6 +15,7 @@ export const AppRouter = () => {
 		<Router>
 			<Routes>
 				<Route path={ROUTES.HOME} element={<HomePage />} />
+				<Route path={ROUTES.COMPONENTS} element={<ComponentsPage />} />
 				<Route path={ROUTES.AUTH.LOGIN} element={<LoginPage />} />
 				<Route path={ROUTES.AUTH.REGISTRATION} element={<RegistrationPage />} />
 				<Route path='*' element={<Navigate to={ROUTES.HOME} replace />} />

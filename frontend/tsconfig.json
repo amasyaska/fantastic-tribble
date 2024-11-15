@@ -21,7 +21,10 @@
 			"@pages/*": ["./pages/*"],
 			"@hooks/*": ["./hooks/*"],
 			"@configs/*": ["./configs/*"],
-			"@services/*": ["./services/*"]
+			"@services/*": ["./services/*"],
+			"@lib/*": ["./lib/*"],
+			"@types/*": ["./types/*"],
+			"@ui/*": ["./components/ui/*"]
 		}
 	},
 	"include": ["src"]
