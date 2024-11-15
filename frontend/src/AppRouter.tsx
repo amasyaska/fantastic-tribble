@@ -4,6 +4,7 @@ import { LoginPage } from '@pages/auth/login/LoginPage'
 import { RegistrationPage } from '@pages/auth/registration/RegistrationPage'
 import { ComponentsPage } from '@pages/components/ComponentsPage'
 import { HomePage } from '@pages/home/HomePage'
+import { SettingsPage } from '@pages/user/settings/SettingsPage'
 import {
 	Navigate,
 	Route,
@@ -23,6 +24,7 @@ export const AppRouter = () => {
 					path={ROUTES.AUTH.FORGOT_PASSWORD}
 					element={<ForgotPasswordPage />}
 				/>
+				<Route path={ROUTES.PROFILE.SETTINGS} element={<SettingsPage />} />
 				<Route path='*' element={<Navigate to={ROUTES.HOME} replace />} />
 			</Routes>
 		</Router>
