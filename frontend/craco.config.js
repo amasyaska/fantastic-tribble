@@ -10,8 +10,9 @@ module.exports = {
 			'@hooks': resolvePath('./src/hooks'),
 			'@configs': resolvePath('./src/configs'),
 			'@lib': resolvePath('./src/lib'),
-			'@types': resolvePath('./src/types'),
+			'@ctypes': resolvePath('./src/types'),
 			'@ui': resolvePath('./src/components/ui'),
+			'@store': resolvePath('./src/store'),
 		},
 	},
 }

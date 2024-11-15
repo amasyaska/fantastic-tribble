@@ -6,6 +6,7 @@ class Routes {
 	AUTH = {
 		LOGIN: `${this.authScope}login`,
 		REGISTRATION: `${this.authScope}registration`,
+		FORGOT_PASSWORD: `${this.authScope}forgot-password`,
 	}
 	COMPONENTS = `${this.homeScope}components`
 }

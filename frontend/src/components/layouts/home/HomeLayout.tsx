@@ -5,12 +5,12 @@ import { HomeHeader } from './header/HomeHeader'
 
 const HomeLayout = ({ children }: PropsWithChildren<any>) => {
 	return (
-		<>
+		<div className='flex flex-col h-full'>
 			<HomeHeader />
-			<main>{children}</main>
+			<main className='flex-1 h-full'>{children}</main>
 			<Toaster position='top-right' />
 			<HomeFooter />
-		</>
+		</div>
 	)
 }
 

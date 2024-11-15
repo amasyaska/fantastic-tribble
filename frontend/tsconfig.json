@@ -23,8 +23,9 @@
 			"@configs/*": ["./configs/*"],
 			"@services/*": ["./services/*"],
 			"@lib/*": ["./lib/*"],
-			"@types/*": ["./types/*"],
-			"@ui/*": ["./components/ui/*"]
+			"@ctypes/*": ["./types/*"], // custom types
+			"@ui/*": ["./components/ui/*"],
+			"@store/*": ["./store/*"]
 		}
 	},
 	"include": ["src"]

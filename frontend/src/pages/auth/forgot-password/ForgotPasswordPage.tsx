@@ -11,12 +11,11 @@ import {
 import { Input } from '@components/ui/input/Input'
 import { ROUTES } from '@configs/routes.config'
 import { useForm } from 'react-hook-form'
-import { PiGithubLogoBold, PiGoogleLogoBold } from 'react-icons/pi'
 import { Link } from 'react-router-dom'
 
-type LoginPageProps = {}
+type ForgotPasswordPageProps = {}
 
-export const LoginPage = ({}: LoginPageProps) => {
+export const ForgotPasswordPage = ({}: ForgotPasswordPageProps) => {
 	const form = useForm()
 
 	return (
@@ -33,42 +32,19 @@ export const LoginPage = ({}: LoginPageProps) => {
 									<FormControl>
 										<Input placeholder='my-email@gmail.com' />
 									</FormControl>
-									<FormDescription>Need verifications</FormDescription>
+									<FormDescription>
+										You take new auto-generated password on your email
+									</FormDescription>
 									<FormMessage />
 								</FormItem>
 							)}
 						/>
-						<FormField
-							control={form.control}
-							name='password'
-							render={() => (
-								<FormItem>
-									<FormLabel>Password</FormLabel>
-									<FormControl>
-										<Input placeholder='***' type='password' />
-									</FormControl>
-									<FormMessage />
-								</FormItem>
-							)}
-						/>
-						<Button>Login</Button>
+						<Button>Registration</Button>
 					</div>
 				</Form>
 				<hr />
-				<Button variant='secondary'>
-					<PiGoogleLogoBold />
-					Google
-				</Button>
-				<Button variant='secondary'>
-					<PiGithubLogoBold />
-					Github
-				</Button>
-				<hr />
 				<Button asChild variant='link'>
-					<Link to={ROUTES.AUTH.REGISTRATION}>Don't have an account yet?</Link>
-				</Button>
-				<Button asChild variant='link'>
-					<Link to={ROUTES.AUTH.FORGOT_PASSWORD}>Forgot password?</Link>
+					<Link to={ROUTES.AUTH.LOGIN}>I remember password</Link>
 				</Button>
 			</div>
 		</div>
