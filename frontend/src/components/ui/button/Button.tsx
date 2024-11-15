@@ -78,15 +78,13 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 				disabled={disabled || isLoading}
 				{...props}
 			>
-				<div className='w-full'>
-					{isLoading && <LoaderCircleIcon className='animate-spin absolute' />}
-					<div
-						className={cn('flex gap-2 items-center justify-center', {
-							'opacity-0': isLoading,
-						})}
-					>
-						{children}
-					</div>
+				{isLoading && <LoaderCircleIcon className='animate-spin absolute' />}
+				<div
+					className={cn('flex gap-2 items-center justify-center', {
+						'opacity-0': isLoading,
+					})}
+				>
+					{children}
 				</div>
 			</Comp>
 		)

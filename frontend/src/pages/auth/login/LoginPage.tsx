@@ -10,6 +10,7 @@ import {
 } from '@components/ui/form/form'
 import { Input } from '@components/ui/input/Input'
 import { ROUTES } from '@configs/routes.config'
+import { useAuth } from '@hooks/auth/useAuth'
 import { useForm } from 'react-hook-form'
 import { PiGithubLogoBold, PiGoogleLogoBold } from 'react-icons/pi'
 import { Link } from 'react-router-dom'
@@ -18,6 +19,7 @@ type LoginPageProps = {}
 
 export const LoginPage = ({}: LoginPageProps) => {
 	const form = useForm()
+	const { login, loginIsLoading } = useAuth()
 
 	return (
 		<div className='w-full h-full flex justify-center items-center'>
@@ -51,7 +53,9 @@ export const LoginPage = ({}: LoginPageProps) => {
 								</FormItem>
 							)}
 						/>
-						<Button>Login</Button>
+						<Button onClick={() => login({})} isLoading={loginIsLoading}>
+							Login
+						</Button>
 					</div>
 				</Form>
 				<hr />

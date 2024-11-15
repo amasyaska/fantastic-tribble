@@ -94,7 +94,7 @@ export const SettingsPage = ({}: SettingsPageProps) => {
 				</div>
 			</Form>
 			<hr />
-			<h2>Companies</h2>
+			<h2>Companies (3)</h2>
 			<div className='flex flex-col gap-2'>
 				{[0, 1, 2].map((item) => (
 					<div className='bg-zinc-100 dark:bg-zinc-900 p-2 rounded-md flex items-center justify-between'>
