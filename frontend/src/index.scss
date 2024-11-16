@@ -1,0 +1,18 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body,
+#root {
+	@apply bg-white dark:bg-zinc-950 h-full min-h-full;
+	@apply text-black dark:text-white;
+}
+
+hr {
+	@apply border-zinc-200 dark:border-zinc-800;
+}
+
+h2 {
+	@apply text-[1.6rem] font-bold;
+}
