@@ -1,19 +1,14 @@
 import { SelectCompany } from '@components/company/select-company/SelectCompany'
 import { Button } from '@components/ui/button/Button'
 import { ROUTES } from '@configs/routes.config'
-import { useState } from 'react'
+import { useTheme } from '@hooks/common/useTheme'
 import { GrMoon, GrSun } from 'react-icons/gr'
 import { HomeHeaderLink } from './HomeHeaderLink'
 import { HomeHeaderProfile } from './HomeHeaderProfile'
 type HomeHeaderProps = {}
 
 export const HomeHeader = ({}: HomeHeaderProps) => {
-	const [theme, setTheme] = useState('light')
-	const handleThemeSwitcher = () => {
-		const newTheme = theme === 'dark' ? 'light' : 'dark'
-		setTheme(newTheme)
-		document.documentElement.classList.toggle('dark', newTheme === 'dark')
-	}
+	const { toggleTheme } = useTheme()
 
 	return (
 		<div className='flex p-3 gap-10 items-center'>
@@ -24,7 +19,7 @@ export const HomeHeader = ({}: HomeHeaderProps) => {
 			<div className='ml-auto flex gap-2'>
 				<HomeHeaderProfile />
 				<SelectCompany />
-				<Button variant='outline' size='icon' onClick={handleThemeSwitcher}>
+				<Button variant='outline' size='icon' onClick={toggleTheme}>
 					<GrMoon className='hidden dark:block' />
 					<GrSun className='block dark:hidden' />
 				</Button>
