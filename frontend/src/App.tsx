@@ -4,6 +4,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { AppRouter } from 'AppRouter'
 import { useState } from 'react'
 import { Provider } from 'react-redux'
+import { BrowserRouter as Router } from 'react-router-dom'
 import './App.css'
 
 function App() {
@@ -11,13 +12,15 @@ function App() {
 
 	return (
 		<>
-			<QueryClientProvider client={client}>
-				<Provider store={store}>
-					<HomeLayout>
-						<AppRouter />
-					</HomeLayout>
-				</Provider>
-			</QueryClientProvider>
+			<Router>
+				<QueryClientProvider client={client}>
+					<Provider store={store}>
+						<HomeLayout>
+							<AppRouter />
+						</HomeLayout>
+					</Provider>
+				</QueryClientProvider>
+			</Router>
 		</>
 	)
 }

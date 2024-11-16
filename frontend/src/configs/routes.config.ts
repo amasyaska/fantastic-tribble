@@ -2,6 +2,8 @@ class Routes {
 	private homeScope = '/'
 	private authScope = `${this.homeScope}auth/`
 	private profileScope = `${this.homeScope}profile/`
+	private workspaceScope = `${this.homeScope}workspace/`
+	private companiesScope = `${this.homeScope}companies/`
 
 	HOME = this.homeScope
 	AUTH = {
@@ -11,6 +13,13 @@ class Routes {
 	}
 	PROFILE = {
 		SETTINGS: `${this.profileScope}settings/`,
+	}
+	COMPANIES = {
+		MANAGE: `${this.companiesScope}manage/`,
+	}
+	WORKSPACE = {
+		HOME: `${this.workspaceScope}`,
+		COMPANY_TASKS: (id: number) => `${this.workspaceScope}company/${id}`,
 	}
 	COMPONENTS = `${this.homeScope}components/`
 }
