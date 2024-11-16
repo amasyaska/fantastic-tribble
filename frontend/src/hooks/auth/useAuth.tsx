@@ -28,7 +28,7 @@ export const useAuth = () => {
 		useMutation({
 			mutationKey: ['send new generated password'],
 			mutationFn: (data: AuthForgotPasswordFormFields) =>
-				authService.forgotPassword(data),
+				authService.recoverPassword(data),
 		})
 
 	return {

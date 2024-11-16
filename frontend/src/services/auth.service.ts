@@ -21,7 +21,7 @@ class AuthService {
 		await delay(500)
 	}
 
-	async forgotPassword(data: AuthForgotPasswordFormFields) {
+	async recoverPassword(data: AuthForgotPasswordFormFields) {
 		console.log(data)
 		await delay(500)
 	}
