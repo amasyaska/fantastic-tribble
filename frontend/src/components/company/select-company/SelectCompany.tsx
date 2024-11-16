@@ -16,7 +16,10 @@ export const SelectCompany = ({}: SelectCompanyProps) => {
 	const { companies } = useCompany()
 
 	return (
-		<Select onValueChange={selectCompany} value={selectedCompany ?? ''}>
+		<Select
+			onValueChange={(value) => selectCompany(Number(value))}
+			value={selectedCompany?.toString() ?? ''}
+		>
 			<SelectTrigger className='w-auto flex gap-2'>
 				<SelectValue placeholder='No company found' />
 			</SelectTrigger>

@@ -4,7 +4,10 @@ import {
 	EditCompanyFormFields,
 } from '@ctypes/company.types'
 import { companyService } from '@services/company.service'
+import { setCompanies, setSelectedCompany } from '@store/slices/companySlice'
 import { useMutation } from '@tanstack/react-query'
+import { useDispatch } from 'react-redux'
+import { useCompanySelect } from './useCompanySelect'
 
 type UseCompanyActionsOptions = {
 	onCreateSuccess?: () => void
@@ -19,12 +22,19 @@ export const useCompanyActions = ({
 	onConnectUserSuccess,
 	onEditSuccess,
 }: UseCompanyActionsOptions) => {
+	const dispatch = useDispatch()
+	const { selectedCompanyId } = useCompanySelect()
+
 	const { mutate: createCompany, isPending: createCompanyIsLoading } =
 		useMutation({
 			mutationKey: ['create new company'],
 			mutationFn: (data: CreateCompanyFormFields) =>
 				companyService.create(data),
-			onSuccess(data, variables, context) {
+			onSuccess(id, variables: CreateCompanyFormFields, context) {
+				companyService.getAll().then((data) => {
+					dispatch(setCompanies(data))
+					dispatch(setSelectedCompany(id))
+				})
 				onCreateSuccess && onCreateSuccess()
 			},
 		})

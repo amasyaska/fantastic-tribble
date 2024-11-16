@@ -13,7 +13,7 @@ export const useCompanySelect = () => {
 	const dispatch = useDispatch()
 
 	const selectCompany = useCallback(
-		(value: string) => {
+		(value: number) => {
 			dispatch(setSelectedCompany(value))
 		},
 		[selectedCompanyId]
