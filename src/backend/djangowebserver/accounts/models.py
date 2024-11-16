@@ -5,7 +5,7 @@ from django.utils.translation import gettext_lazy
 from .managers import CustomUserManager
 
 class CustomUser(AbstractBaseUser, PermissionsMixin):
-    id = models.BigAutoField(primary_key=True)
+    id = models.BigAutoField(primary_key=True, editable=False)
     username = models.CharField(max_length=255, unique=True)
     email = models.EmailField(max_length=255, unique=True)
     first_name = models.CharField(max_length=127)
