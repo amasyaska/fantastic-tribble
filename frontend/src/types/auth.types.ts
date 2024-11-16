@@ -23,6 +23,9 @@ export const authLoginSchema = z.object({
 
 export const authRegistrationSchema = z
 	.object({
+		firstName: z.string().email(FORM_MESSAGES.INVALID_EMAIL),
+		lastName: z.string().email(FORM_MESSAGES.INVALID_EMAIL),
+		username: z.string().email(FORM_MESSAGES.INVALID_EMAIL),
 		email: z.string().email(FORM_MESSAGES.INVALID_EMAIL),
 		password: z.string().min(6, FORM_MESSAGES.PASSWORD_MUST_BE_LONGER),
 		confirmPassword: z.string().min(6, FORM_MESSAGES.PASSWORD_MUST_BE_LONGER),

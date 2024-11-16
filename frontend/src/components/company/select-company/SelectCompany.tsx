@@ -11,11 +11,15 @@ import { useCompanySelect } from '@hooks/company/useCompanySelect'
 type SelectCompanyProps = {}
 
 export const SelectCompany = ({}: SelectCompanyProps) => {
-	const { selectCompany, selectedCompany } = useCompanySelect()
+	const { selectCompany, selectedCompanyId: selectedCompany } =
+		useCompanySelect()
 	const { companies } = useCompany()
 
 	return (
-		<Select onValueChange={selectCompany} value={selectedCompany ?? ''}>
+		<Select
+			onValueChange={(value) => selectCompany(Number(value))}
+			value={selectedCompany?.toString() ?? ''}
+		>
 			<SelectTrigger className='w-auto flex gap-2'>
 				<SelectValue placeholder='No company found' />
 			</SelectTrigger>

@@ -37,7 +37,7 @@ export const CompanyListItem = ({
 						</Button>
 					</DropdownMenuTrigger>
 					<DropdownMenuContent side='right' align='start'>
-						<DropdownMenuItem onClick={() => selectCompany(id.toString())}>
+						<DropdownMenuItem onClick={() => selectCompany(id)}>
 							Select
 						</DropdownMenuItem>
 

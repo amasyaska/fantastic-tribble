@@ -10,9 +10,7 @@ import {
 } from '@components/ui/form/form'
 import { Input } from '@components/ui/input/Input'
 import { useForm } from 'react-hook-form'
-import { CgTrash } from 'react-icons/cg'
 import { IoMdClose } from 'react-icons/io'
-import { MdOutlineEdit } from 'react-icons/md'
 
 type SettingsPageProps = {}
 
@@ -24,12 +22,40 @@ export const SettingsPage = ({}: SettingsPageProps) => {
 			<Form {...form}>
 				<div className='flex flex-col gap-3'>
 					<h2>Profile data</h2>
+					<div className='flex gap-2'>
+						<FormField
+							control={form.control}
+							name='firstName'
+							render={({ field }) => (
+								<FormItem>
+									<FormLabel>First name</FormLabel>
+									<FormControl>
+										<Input placeholder='First name' {...field} />
+									</FormControl>
+									<FormMessage />
+								</FormItem>
+							)}
+						/>
+						<FormField
+							control={form.control}
+							name='lastName'
+							render={({ field }) => (
+								<FormItem>
+									<FormLabel>Last name</FormLabel>
+									<FormControl>
+										<Input placeholder='Last name' {...field} />
+									</FormControl>
+									<FormMessage />
+								</FormItem>
+							)}
+						/>
+					</div>
 					<FormField
 						control={form.control}
-						name='name'
+						name='username'
 						render={() => (
 							<FormItem>
-								<FormLabel>Name</FormLabel>
+								<FormLabel>Username</FormLabel>
 								<FormControl>
 									<Input placeholder='name' />
 								</FormControl>
@@ -93,25 +119,6 @@ export const SettingsPage = ({}: SettingsPageProps) => {
 					<Button variant='secondary'>Change password</Button>
 				</div>
 			</Form>
-			<hr />
-			<h2>Companies (3)</h2>
-			<div className='flex flex-col gap-2'>
-				{[0, 1, 2].map((item) => (
-					<div className='bg-zinc-100 dark:bg-zinc-900 p-2 rounded-md flex items-center justify-between'>
-						<div className='hover:bg-zinc-200 dark:hover:bg-zinc-800 p-2 rounded-md cursor-text flex gap-2 items-center'>
-							Company {item}
-							<MdOutlineEdit className='opacity-30' />
-						</div>
-						<Button
-							className='opacity-50 hover:opacity-100'
-							variant='ghost'
-							size='icon'
-						>
-							<CgTrash className='' />
-						</Button>
-					</div>
-				))}
-			</div>
 		</div>
 	)
 }
