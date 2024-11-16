@@ -1,5 +1,17 @@
-# Created by https://www.toptal.com/developers/gitignore/api/react,visualstudiocode
-# Edit at https://www.toptal.com/developers/gitignore?templates=react,visualstudiocode
+__pycache__
+
+.venv
+.env
+
+*.swp
+*.swo
+
+*.pyc
+*.log
+
+*.bak
+*.db
+*.sqlite3
 
 ### react ###
 .DS_*
@@ -35,5 +47,3 @@ sketch
 # Ignore all local history of files
 .history
 .ionide
-
-# End of https://www.toptal.com/developers/gitignore/api/react,visualstudiocode
