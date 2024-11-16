@@ -1,5 +1,6 @@
 import {
 	AuthCredentialsType,
+	AuthForgotPasswordFormFields,
 	AuthLoginFormFields,
 	AuthRegistrationFormFields,
 } from '@ctypes/auth.types'
@@ -23,11 +24,20 @@ export const useAuth = () => {
 			authService.register(data),
 	})
 
+	const { mutate: recoverPassword, isPending: recoverPasswordIsLoading } =
+		useMutation({
+			mutationKey: ['send new generated password'],
+			mutationFn: (data: AuthForgotPasswordFormFields) =>
+				authService.forgotPassword(data),
+		})
+
 	return {
 		isLogged: value != null,
 		login,
 		loginIsLoading,
 		register,
 		registerIsLoading,
+		recoverPassword,
+		recoverPasswordIsLoading,
 	}
 }

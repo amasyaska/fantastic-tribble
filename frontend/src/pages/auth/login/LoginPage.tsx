@@ -10,30 +10,47 @@ import {
 } from '@components/ui/form/form'
 import { Input } from '@components/ui/input/Input'
 import { ROUTES } from '@configs/routes.config'
+import { AuthLoginFormFields, authLoginSchema } from '@ctypes/auth.types'
+import { zodResolver } from '@hookform/resolvers/zod'
 import { useAuth } from '@hooks/auth/useAuth'
+import { useCallback } from 'react'
 import { useForm } from 'react-hook-form'
 import { PiGithubLogoBold, PiGoogleLogoBold } from 'react-icons/pi'
 import { Link } from 'react-router-dom'
 
-type LoginPageProps = {}
-
-export const LoginPage = ({}: LoginPageProps) => {
-	const form = useForm()
+export const LoginPage = () => {
+	const form = useForm<AuthLoginFormFields>({
+		resolver: zodResolver(authLoginSchema),
+		defaultValues: {
+			email: '',
+			password: '',
+		},
+	})
 	const { login, loginIsLoading } = useAuth()
+
+	const onSubmit = useCallback(
+		(data: AuthLoginFormFields) => {
+			login(data)
+		},
+		[login]
+	)
 
 	return (
 		<div className='w-full h-full flex justify-center items-center'>
 			<div className='px-3 w-full max-w-[25rem] flex flex-col gap-3'>
 				<Form {...form}>
-					<div className='flex flex-col gap-3'>
+					<form
+						onSubmit={form.handleSubmit(onSubmit)}
+						className='flex flex-col gap-3'
+					>
 						<FormField
 							control={form.control}
 							name='email'
-							render={() => (
+							render={({ field }) => (
 								<FormItem>
 									<FormLabel>Email</FormLabel>
 									<FormControl>
-										<Input placeholder='my-email@gmail.com' />
+										<Input placeholder='my-email@gmail.com' {...field} />
 									</FormControl>
 									<FormDescription>Need verifications</FormDescription>
 									<FormMessage />
@@ -43,20 +60,20 @@ export const LoginPage = ({}: LoginPageProps) => {
 						<FormField
 							control={form.control}
 							name='password'
-							render={() => (
+							render={({ field }) => (
 								<FormItem>
 									<FormLabel>Password</FormLabel>
 									<FormControl>
-										<Input placeholder='***' type='password' />
+										<Input placeholder='***' type='password' {...field} />
 									</FormControl>
 									<FormMessage />
 								</FormItem>
 							)}
 						/>
-						<Button onClick={() => login({})} isLoading={loginIsLoading}>
+						<Button type='submit' isLoading={loginIsLoading}>
 							Login
 						</Button>
-					</div>
+					</form>
 				</Form>
 				<hr />
 				<Button variant='secondary'>

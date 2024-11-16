@@ -10,6 +10,13 @@ import {
 } from '@components/ui/form/form'
 import { Input } from '@components/ui/input/Input'
 import { ROUTES } from '@configs/routes.config'
+import {
+	AuthRegistrationFormFields,
+	authRegistrationSchema,
+} from '@ctypes/auth.types'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useAuth } from '@hooks/auth/useAuth'
+import { useCallback } from 'react'
 import { useForm } from 'react-hook-form'
 import { PiGithubLogoBold, PiGoogleLogoBold } from 'react-icons/pi'
 import { Link } from 'react-router-dom'
@@ -17,21 +24,40 @@ import { Link } from 'react-router-dom'
 type RegistrationPageProps = {}
 
 export const RegistrationPage = ({}: RegistrationPageProps) => {
-	const form = useForm()
+	const form = useForm<AuthRegistrationFormFields>({
+		resolver: zodResolver(authRegistrationSchema),
+		defaultValues: {
+			email: '',
+			password: '',
+			confirmPassword: '',
+		},
+	})
+
+	const { register, registerIsLoading } = useAuth()
+
+	const onSubmit = useCallback(
+		(data: AuthRegistrationFormFields) => {
+			register(data)
+		},
+		[register]
+	)
 
 	return (
 		<div className='w-full h-full flex justify-center items-center'>
 			<div className='px-3 w-full max-w-[25rem] flex flex-col gap-3'>
 				<Form {...form}>
-					<div className='flex flex-col gap-3'>
+					<form
+						onSubmit={form.handleSubmit(onSubmit)}
+						className='flex flex-col gap-3'
+					>
 						<FormField
 							control={form.control}
 							name='email'
-							render={() => (
+							render={({ field }) => (
 								<FormItem>
 									<FormLabel>Email</FormLabel>
 									<FormControl>
-										<Input placeholder='my-email@gmail.com' />
+										<Input placeholder='my-email@gmail.com' {...field} />
 									</FormControl>
 									<FormDescription>Need verifications</FormDescription>
 									<FormMessage />
@@ -41,11 +67,11 @@ export const RegistrationPage = ({}: RegistrationPageProps) => {
 						<FormField
 							control={form.control}
 							name='password'
-							render={() => (
+							render={({ field }) => (
 								<FormItem>
 									<FormLabel>Password</FormLabel>
 									<FormControl>
-										<Input placeholder='***' type='password' />
+										<Input placeholder='***' type='password' {...field} />
 									</FormControl>
 									<FormMessage />
 								</FormItem>
@@ -54,18 +80,20 @@ export const RegistrationPage = ({}: RegistrationPageProps) => {
 						<FormField
 							control={form.control}
 							name='confirmPassword'
-							render={() => (
+							render={({ field }) => (
 								<FormItem>
 									<FormLabel>Confirm password</FormLabel>
 									<FormControl>
-										<Input placeholder='***' type='password' />
+										<Input placeholder='***' type='password' {...field} />
 									</FormControl>
 									<FormMessage />
 								</FormItem>
 							)}
 						/>
-						<Button>Registration</Button>
-					</div>
+						<Button type='submit' isLoading={registerIsLoading}>
+							Registration
+						</Button>
+					</form>
 				</Form>
 				<hr />
 				<Button variant='secondary'>
