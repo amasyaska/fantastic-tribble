@@ -12,7 +12,10 @@ export const useCompany = () => {
 	})
 
 	return {
-		companies: data,
+		companies: data?.map((item, index) => ({
+			...item,
+			id: index,
+		})),
 		companiesIsLoading,
 		companiesIsSuccess,
 	}

@@ -11,7 +11,8 @@ import { useCompanySelect } from '@hooks/company/useCompanySelect'
 type SelectCompanyProps = {}
 
 export const SelectCompany = ({}: SelectCompanyProps) => {
-	const { selectCompany, selectedCompany } = useCompanySelect()
+	const { selectCompany, selectedCompanyId: selectedCompany } =
+		useCompanySelect()
 	const { companies } = useCompany()
 
 	return (
