@@ -2,6 +2,8 @@ from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 from django.utils.translation import gettext_lazy
 
+from rest_framework_simplejwt.tokens import RefreshToken
+
 from .managers import CustomUserManager
 
 class CustomUser(AbstractBaseUser, PermissionsMixin):
@@ -24,3 +26,10 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     REQUIRED_FIELDS = ['email', 'first_name', 'last_name']
 
     objects = CustomUserManager()
+
+    def get_jwt_tokens_for_user(self):
+        refresh_token = RefreshToken.for_user(self)
+        return {
+            'refresh_token': str(refresh_token),
+            'access_token': str(refresh_token.access_token)
+        }
