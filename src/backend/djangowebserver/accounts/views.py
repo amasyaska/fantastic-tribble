@@ -13,7 +13,7 @@ class UserAPIView(GenericAPIView):
     serializer_class = CustomUserCreateSerializer
 
     def post(self, request):
-        serializer = self.serializer_class(request.data)
+        serializer = self.serializer_class(data=request.data)
         
         if (serializer.is_valid(raise_exception=True)):
             serializer.save()
