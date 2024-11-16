@@ -26,3 +26,20 @@ class CustomUserManager(BaseUserManager):
         user.save(using=self._db)
 
         return user
+    
+
+    def create_superuser(self, username, email, first_name, last_name, password, **extra_fields):
+        extra_fields.setdefault("is_staff", True)
+        extra_fields.setdefault("is_superuser", True)
+        extra_fields.setdefault("is_verified", True)
+
+        if extra_fields.get("is_staff") is not True:
+            raise ValueError(gettext_lazy("Super user must have is_staff=True"))
+
+        if extra_fields.get("is_superuser") is not True:
+            raise ValueError(gettext_lazy("Super user must have is_superuser=True"))
+        
+        user = self.create_user(username=username, email=email, first_name=first_name, last_name=last_name, password=password, extra_fields=extra_fields)
+        user.save(using=self._db)
+
+        return user
