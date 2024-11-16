@@ -5,9 +5,9 @@ import { HomeHeader } from './header/HomeHeader'
 
 const HomeLayout = ({ children }: PropsWithChildren<any>) => {
 	return (
-		<div className='flex flex-col h-full'>
+		<div className='flex flex-col min-h-full h-full'>
 			<HomeHeader />
-			<main className='flex-1 h-full'>{children}</main>
+			<main className='flex-1 min-h-full h-full'>{children}</main>
 			<Toaster position='top-right' />
 			<HomeFooter />
 		</div>

@@ -1,46 +1,48 @@
-# Getting Started with Create React App
+# Документація
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Сторінки
 
-## Available Scripts
+- **Головна**: основна сторінка проєкту.
+- **Логін**: форма авторизації користувачів.
+- **Реєстрація**: форма створення нового користувача.
+- **Відновлення паролю**: функціонал для відновлення доступу до акаунту.
+- **Налаштування**: персоналізація профілю та інших параметрів.
+- **Компоненти**: реюзабельні компоненти для проєкту.
 
-In the project directory, you can run:
+Актуальні дані по маршутизації перевіряйте [тут](https://github.com/amasyaska/fantastic-tribble/blob/frontend/frontend/src/configs/routes.config.ts)
 
-### `npm start`
+## Технології та бібліотеки
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- **React**
+- **Redux**: зберігання глобального стану
+- **TypeScript**: типізація для безпечного коду.
+- **shadcn/ui**: бібліотека для побудови UI.
+- **react-hook-form (useForm)**: для роботи з формами.
+- **axios**: для HTTP-запитів.
+- **tailwindcss**: для швидкого та зручного стилювання.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Структура проєкту
 
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+```plaintext
+src/
+├── components/            # Реюзабельні компоненти інтерфейсу
+│   ├── ui/                # Компоненти UI
+│   └── layouts/           # Макети для сторінок (Header, Footer)
+├── pages/                 # Сторінки додатку
+│   ├── home/              # Головна сторінка
+│   ├── auth/              # Сторінки авторизації
+│   │   ├── login/         # Сторінка входу
+│   │   ├── register/      # Сторінка реєстрації
+│   │   └── forgotPassword/    # Сторінка відновлення паролю
+│   ├── components/        # Сторінка з відображеними компонентами (тестування)
+│   ├── user/              # Сторінки користувача
+│   │   ├── settings/      # Сторінка налаштувань
+├── configs/               # Конфігураційні файли та константи
+├── lib/                   # Наразі тут тільки утіліти (допоміжні функції)
+├── hooks/                 # React-хуки для обробки логіки елементів
+├── services/              # Сервіси для роботи з API (axios)
+├── types/                 # Типи, схеми zod та поля форм
+├── store/                 # Redux для зберігання глобального стану
+├── AppRouter.tsx          # Маршутизація
+└── App.tsx                # Головний елемент та провайдери
+```
