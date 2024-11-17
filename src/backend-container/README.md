@@ -1,30 +1,22 @@
-# fantastic-tribble
-
-## About the Project
-This is a web application designed to streamline and automate work processes. The platform enables users to organize tasks, and collaborate effectively within companies.
-
-## About Us
-https://github.com/amasyaska Bohdan Kolesnikov | Team Lead / backend \
-https://github.com/GineTik Denys Shevchuk | Frontend / DevOps \
-https://github.com/MariiaMazur Mariia Mazur | Design / frontend \
-https://github.com/vla-decr000 Vladyslav | Tech lead / database developer
-
-## Features
-***Create and Manage Groups or Companies:***  
-Users can establish companies or groups and add others to join.  
-***Project Management:***  
-Create and organize projects.  
-***Task Tracking:***  
-Users can add tasks to ongoing projects. Other team members can view, execute, and monitor these tasks to ensure efficient collaboration.  
-
-## Implementation
-***frontend:*** React.js, TypeScript  
-***backend:*** Django, Django REST framework, JWT Authentication  
-
-## How to run the project
-Read the README.md file in the `src/` directory
-
-## RESTful API
+# backend
+Django, Django REST framework, SimpleJWT
+# test server locally
+1. ```git clone https://github.com/amasyaska/fantastic-tribble```
+2. create virtual environment and install requirements.txt
+   ```cd fantastic-tribble/src/backend``` \
+   ```python -m venv .venv``` \
+   Linux: ```source .venv/bin/activate``` \
+   Windows: ```.venv\Scripts\activate``` \
+   ```pip install requirements.txt```
+4. create .env file in src/backend/djangowebserver, add SECRET_KEY and DEBUG
+   ```
+   SECRET_KEY={your SECRET_KEY here}
+   DEBUG={True or False}
+   ```
+5. ```cd ./djangowebserver```
+6. ```python manage.py runserver```
+7. send your requests to ```localhost:8000```
+# endpoints
 \* – required field
 - /api/v1/accounts/user/
    - POST | create user \
@@ -72,6 +64,3 @@ Read the README.md file in the `src/` directory
    - POST | adds worker to task \
 - /api/v1/project/{project_id}/task/{task_id}/workers/{worker_id}
    - DELETE | deletes task worker
-
-## security
-https implementation is in nginx-https-setup branch

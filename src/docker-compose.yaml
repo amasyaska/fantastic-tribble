@@ -1,0 +1,47 @@
+version: '3'
+
+services:
+  web_app:
+    build: ./backend-container
+    volumes:
+      - ./backend-container:/usr/src/app
+    expose:
+      - 8000
+    env_file:
+      - ./backend-container/.env
+    depends_on:
+      - db
+
+  nginx_service:
+    build: ./nginx-container
+    ports:
+      - 8080:80
+    depends_on:
+      - web_app
+
+  frontend:
+    build: ./frontend-container
+    volumes:
+      - ./frontend-container:/usr/src/app
+      - /usr/src/app/node_modules
+    ports:
+      - 3000:3000
+    environment:
+      - REACT_APP_API_URL=http://localhost:8080/
+    depends_on:
+      - nginx_service
+
+  db:
+    build: ./postgres-container
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    env_file:
+      - ./postgres-container/.env
+
+volumes:
+  postgres_data:
+    driver: local
+    driver_opts:
+      type: none
+      device: ./data/db_data
+      o: bind
