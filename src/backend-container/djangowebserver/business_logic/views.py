@@ -136,6 +136,20 @@ class ProjectAPIView(GenericAPIView):
 
     serializer_class = ProjectCreateSerializer
 
+    def get(self, request, project_id):
+        try:
+            project = Project.objects.get(pk=project_id)
+        except:
+            return Response({'message': 'Project not found.'}, status=status.HTTP_404_NOT_FOUND)
+        return Response(
+            {
+                'id': project.id,
+                'name': project.name,
+                'description': project.description,
+                'company': project.company.id,
+            },
+            status=status.HTTP_200_OK)
+
     @permission_classes([IsAuthenticated])
     def post(self, request):
         serializer = self.serializer_class(data=request.data)
@@ -158,3 +172,22 @@ class ProjectAPIView(GenericAPIView):
                 status=status.HTTP_201_CREATED)
         
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+    @permission_classes([IsAuthenticated])
+    def delete(self, request, project_id):
+        try:
+            project = Project.objects.get(pk=project_id)
+        except:
+            return Response({'message': 'Project not found.'}, status=status.HTTP_404_NOT_FOUND)
+        try:
+            token = request.headers['Authorization'].split()[1]
+            user_id = AccessToken(token=token)['user_id']
+            assert user_id == project.company.creator.id     # if user that invokes deletion is a creator of a company
+        except AssertionError:
+            return Response({'message': 'Permission denied.'}, status=status.HTTP_403_FORBIDDEN)
+        project.delete()
+        return Response(
+            {
+                'message': f'Project with id {project_id} has been successfully deleted.',
+            },
+            status=status.HTTP_200_OK)

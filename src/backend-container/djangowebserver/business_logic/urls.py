@@ -9,4 +9,5 @@ urlpatterns = [
     path('company/<int:company_id>/members/<int:member_id>', CompanyMembersAPIView.as_view(http_method_names=['delete'])),
 
     path('project/', ProjectAPIView.as_view(http_method_names=['post', 'options'])),
+    path('project/<int:project_id>', ProjectAPIView.as_view(http_method_names=['get', 'put', 'delete'])),
 ]
