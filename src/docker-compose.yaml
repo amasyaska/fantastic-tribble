@@ -19,6 +19,18 @@ services:
     depends_on:
       - web_app
 
+  frontend:
+    build: ./frontend-container
+    volumes:
+      - ./frontend-container:/usr/src/app
+      - /usr/src/app/node_modules
+    ports:
+      - 3000:3000
+    environment:
+      - REACT_APP_API_URL=http://localhost:8080/
+    depends_on:
+      - nginx_service
+
   db:
     build: ./postgres-container
     volumes:
