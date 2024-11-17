@@ -20,3 +20,6 @@ Users can add tasks to ongoing projects. Other team members can view, execute, a
 ***frontend:*** React.js, TypeScript  
 ***backend:*** Django, Django REST framework, JWT Authentication  
 RESTful API
+
+## How to run the project
+Read the README.md file in the `src/` directory
