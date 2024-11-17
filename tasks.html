@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Work Organisation</title>
+    <link rel="stylesheet" href="styles_tasks.css">
+</head>
+<body>
+    <div class="container">
+        <aside class="sidebar">
+            <nav>
+                <ul>
+                    <li><button class="nav-btn" id="profile-btn">Profile</button></li>
+                    <li><button class="nav-btn active" id="tasks-btn">Tasks</button></li>
+                    <li><button class="nav-btn" id="team-btn">Team</button></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <section class="tasks">
+                <h2>Task List</h2>
+
+                <div class="task-item">
+                    <input type="text" class="task-input" placeholder="Enter task...">
+                    <button class="btn-check"></button>
+                </div>
+
+                <div class="task-item">
+                    <input type="text" class="task-input" placeholder="Enter task...">
+                    <button class="btn-check"></button>
+                </div>
+
+                <div class="task-item">
+                    <input type="text" class="task-input" placeholder="Enter task...">
+                    <button class="btn-check"></button>
+                </div>
+
+                <div class="task-item">
+                    <input type="text" class="task-input" placeholder="Enter task...">
+                    <button class="btn-check"></button>
+                </div>
+
+                <div class="add-task">
+                    <input type="text" id="new-task" placeholder="Add new task">
+                    <button onclick="addTask()">Add Task</button>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        function addTask() {
+            const newTaskInput = document.getElementById("new-task");
+            const newTaskText = newTaskInput.value.trim();
+            if (newTaskText) {
+                const taskList = document.querySelector(".tasks");
+                const newTaskItem = document.createElement("div");
+                newTaskItem.classList.add("task-item");
+
+                const newTaskInputField = document.createElement("input");
+                newTaskInputField.type = "text";
+                newTaskInputField.classList.add("task-input");
+                newTaskInputField.placeholder = "Enter task...";
+
+                const newCheckButton = document.createElement("button");
+                newCheckButton.classList.add("btn-check");
+
+                newTaskItem.appendChild(newTaskInputField);
+                newTaskItem.appendChild(newCheckButton);
+                taskList.appendChild(newTaskItem);
+
+                newTaskInput.value = "";
+
+                // Add event listener to toggle checkmark
+                newCheckButton.addEventListener('click', function() {
+                    if (newCheckButton.classList.contains('checked')) {
+                        newCheckButton.classList.remove('checked');
+                        newTaskItem.classList.remove('completed');
+                    } else {
+                        newCheckButton.classList.add('checked');
+                        newTaskItem.classList.add('completed');
+                    }
+                });
+            }
+        }
+
+        // Add event listener to toggle checkmark on existing tasks
+        document.querySelectorAll('.btn-check').forEach(button => {
+            button.addEventListener('click', function() {
+                const taskItem = button.parentElement;
+                button.classList.toggle('checked');
+                taskItem.classList.toggle('completed');
+            });
+        });
+
+        // Add active class to clicked button in menu
+        document.querySelectorAll('.nav-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                document.querySelector('.nav-btn.active').classList.remove('active');
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>
