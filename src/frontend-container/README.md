@@ -14,8 +14,6 @@
 
 Check the latest routing configuration [here](https://github.com/amasyaska/fantastic-tribble/blob/frontend/frontend/src/configs/routes.config.ts).
 
----
-
 ## Technologies and Libraries
 
 - **React**
@@ -25,8 +23,6 @@ Check the latest routing configuration [here](https://github.com/amasyaska/fanta
 - **react-hook-form (useForm)**: For managing forms and validation.
 - **axios**: For HTTP requests.
 - **tailwindcss**: For rapid and flexible styling.
-
----
 
 ## Project Structure
 
