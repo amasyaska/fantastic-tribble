@@ -9,7 +9,7 @@ class Company(models.Model):
     creator = models.ForeignKey(CustomUser, on_delete=models.DO_NOTHING)
 
 
-class CompanyUser(models.Model):
+class CompanyCustomUser(models.Model):
     
     id = models.BigAutoField(primary_key=True, editable=False)
     user = models.ForeignKey(CustomUser, on_delete=models.DO_NOTHING)
