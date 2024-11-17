@@ -3,7 +3,7 @@ import {
 	AuthLoginFormFields,
 	AuthRegistrationFormFields,
 } from '@ctypes/auth.types'
-import { toSnakeCase } from '@lib/typeConverter'
+import { toCamelCase, toSnakeCase } from '@lib/typeConverter'
 import { delay } from '@lib/utils'
 import { $api } from './api'
 
@@ -19,7 +19,9 @@ class AuthService {
 	}
 
 	async login(data: AuthLoginFormFields) {
-		return $api.post('/api/v1/accounts/login/', toSnakeCase(data))
+		return $api
+			.post('/api/v1/accounts/login/', toSnakeCase(data))
+			.then((data) => toCamelCase(data))
 	}
 
 	async refreshTokens() {
