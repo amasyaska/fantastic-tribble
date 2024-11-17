@@ -1,6 +1,6 @@
 from django.urls import path
 
-from .views import CompanyAPIView, CompanyMembersAPIView, ProjectAPIView, CustomUserCompaniesAPIView, TaskAPIView
+from .views import CompanyAPIView, CompanyMembersAPIView, ProjectAPIView, CustomUserCompaniesAPIView, TaskAPIView, TaskCustomUserAPIView
 
 urlpatterns = [
     path('company/', CompanyAPIView.as_view(http_method_names=['post', 'options'])),
@@ -14,4 +14,6 @@ urlpatterns = [
 
     path('project/<int:project_id>/task/', TaskAPIView.as_view(http_method_names=['post'])),
     path('project/<int:project_id>/task/<int:task_id>', TaskAPIView.as_view(http_method_names=['get', 'put', 'delete'])),
+    path('project/<int:project_id>/task/<int:task_id>/workers/', TaskCustomUserAPIView.as_view(http_method_names=['get', 'post', 'put'])),
+    path('project/<int:project_id>/task/<int:task_id>/workers/<int:worker_id>', TaskCustomUserAPIView.as_view(http_method_names=['delete'])),
 ]
