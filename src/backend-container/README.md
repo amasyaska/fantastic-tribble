@@ -44,3 +44,8 @@ Django, Django REST framework, SimpleJWT
    - DELETE | deletes company if user requests to delete his own (!) company \
      in: {} \
      out: {"message": *message*}
+- /api/v1/company/{id}/members/
+   - GET | gives company members \
+   - POST | adds company member
+- /api/v1/company/{company_id}/members/{member_id}
+   - DELETE | gives company members \
