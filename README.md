@@ -1,15 +1,15 @@
-# fantastic-tribble
+# fantastic-tribble 😎
 
-## About the Project
+## About the Project 🥰
 This is a web application designed to streamline and automate work processes. The platform enables users to organize tasks, and collaborate effectively within companies.
 
-## About Us
+## About Us 🚂
 https://github.com/amasyaska Bohdan Kolesnikov | Team Lead / backend \
-https://github.com/GineTik Denys Shevchuk | Frontend / DevOps \
+https://github.com/GineTik Denis Shevchuk | Frontend / DevOps \
 https://github.com/MariiaMazur Mariia Mazur | Design / frontend \
 https://github.com/vla-decr000 Vladyslav | Tech lead / database developer
 
-## Features
+## Features 🏵️
 ***Create and Manage Groups or Companies:***  
 Users can establish companies or groups and add others to join.  
 ***Project Management:***  
@@ -17,14 +17,14 @@ Create and organize projects.
 ***Task Tracking:***  
 Users can add tasks to ongoing projects. Other team members can view, execute, and monitor these tasks to ensure efficient collaboration.  
 
-## Implementation
+## Implementation 💻
 ***frontend:*** React.js, TypeScript  
 ***backend:*** Django, Django REST framework, JWT Authentication  
 
-## How to run the project
+## How to run the project 🧰
 Read the README.md file in the `src/` directory
 
-## RESTful API
+## RESTful API 🦝
 \* – required field
 - /api/v1/accounts/user/
    - POST | create user \
@@ -73,5 +73,7 @@ Read the README.md file in the `src/` directory
 - /api/v1/project/{project_id}/task/{task_id}/workers/{worker_id}
    - DELETE | deletes task worker
 
-## security
-https implementation is in nginx-https-setup branch
+## security :
+https implementation is in ```nginx-https-setup``` branch
+copy your SSL certificate and key to nginx-container and name them "cert.crt" and "cert.key"
+
