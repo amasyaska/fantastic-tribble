@@ -16,6 +16,7 @@ import {
 	FormMessage,
 } from '@components/ui/form/form'
 import { Input } from '@components/ui/input/Input'
+import { Textarea } from '@components/ui/textarea/Textarea'
 import { EditCompanyFormFields, editCompanyScheme } from '@ctypes/company.types'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useCompanyActions } from '@hooks/company/useCompanyActions'
@@ -85,14 +86,14 @@ export const EditCompanyDialog = ({
 								<FormItem>
 									<FormLabel>Description</FormLabel>
 									<FormControl>
-										<Input placeholder='user-email@gmail.com' {...field} />
+										<Textarea placeholder='user-email@gmail.com' {...field} />
 									</FormControl>
 									<FormMessage />
 								</FormItem>
 							)}
 						/>
 						<Button type='submit' isLoading={editCompanyIsLoading}>
-							Connect
+							Edit
 						</Button>
 					</form>
 				</Form>

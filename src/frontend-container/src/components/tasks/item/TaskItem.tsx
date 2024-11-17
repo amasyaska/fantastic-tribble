@@ -13,10 +13,10 @@ export const TaskItem = (props: TaskItemProps) => {
 	return (
 		<div className='relative'>
 			<OpenTaskDialog {...props}>
-				<div className='bg-zinc-900 p-2 rounded-[.3rem] flex flex-col gap-2 w-full items-start border border-transparent hover:border-zinc-500 cursor-pointer'>
+				<div className='bg-zinc-200/50 dark:bg-zinc-900 p-2 rounded-[.3rem] flex flex-col gap-2 w-full items-start border border-transparent hover:border-zinc-500 cursor-pointer'>
 					<div className=''>{name}</div>
 					<div className='text-zinc-500'>{description}</div>
-					<div className='text-[.8rem] bg-zinc-500/20 rounded-md px-2 p-1'>
+					<div className='text-[.8rem] bg-zinc-500/10 rounded-md px-2 p-1'>
 						{status}
 					</div>
 				</div>
