@@ -8,8 +8,8 @@ from rest_framework import status
 
 from rest_framework_simplejwt.tokens import AccessToken
 
-from .serializers import CompanyCreateSerializer, CompanyMembersSerializer, ProjectCreateSerializer
-from .models import Company, CompanyCustomUser, Project
+from .serializers import CompanyCreateSerializer, CompanyMembersSerializer, ProjectCreateSerializer, TaskCreateSerializer
+from .models import Company, CompanyCustomUser, Project, Task
 
 class CompanyAPIView(GenericAPIView):
 
@@ -202,5 +202,79 @@ class CustomUserCompaniesAPIView(GenericAPIView):
         return Response(
             {
                 'companies': [elem.company.id for elem in list(CompanyCustomUser.objects.filter(user=user_id))],
+            },
+            status=status.HTTP_200_OK)
+    
+
+class TaskAPIView(GenericAPIView):
+
+    serializer_class = TaskCreateSerializer
+
+    def get(self, request, project_id, task_id):
+        try:
+            project = Project.objects.get(pk=project_id)
+        except:
+            return Response({'message': 'Project not found.'}, status=status.HTTP_404_NOT_FOUND)
+        try:
+            task = Task.objects.get(pk=task_id)
+        except:
+            return Response({'message': 'Task not found.'}, status=status.HTTP_404_NOT_FOUND)
+        try:
+            token = request.headers['Authorization'].split()[1]
+            user_id = AccessToken(token=token)['user_id']
+            # if user in this project
+        except AssertionError:
+            return Response({'message': 'Permission denied.'}, status=status.HTTP_403_FORBIDDEN)
+        return Response(
+            {
+                'id': task.id,
+                'name': task.name,
+                'description': task.description,
+                'project': task.project.id,
+            },
+            status=status.HTTP_200_OK)
+
+    @permission_classes([IsAuthenticated])
+    def post(self, request, project_id):
+        serializer = self.serializer_class(data=request.data, context = {'project_id': project_id})
+        
+        if (serializer.is_valid(raise_exception=True)):
+            try:
+                token = request.headers['Authorization'].split()[1]
+                user_id = AccessToken(token=token)['user_id']
+                assert Project.objects.get(pk=project_id).id # user in project
+            except AssertionError:
+                return Response({'message': 'Permission denied. You cannot add tasks to this project.'}, status=status.HTTP_403_FORBIDDEN)
+
+            serializer.save()
+            return Response(
+                {
+                'message': 'Task added successfully.',
+                'data': serializer.data
+                },
+                status=status.HTTP_201_CREATED)
+        
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    @permission_classes([IsAuthenticated])
+    def delete(self, request, project_id, task_id):
+        try:
+            project = Project.objects.get(pk=project_id)
+        except:
+            return Response({'message': 'Project not found.'}, status=status.HTTP_404_NOT_FOUND)
+        try:
+            task = Task.objects.get(pk=task_id)
+        except:
+            return Response({'message': 'Task not found.'}, status=status.HTTP_404_NOT_FOUND)
+        try:
+            token = request.headers['Authorization'].split()[1]
+            user_id = AccessToken(token=token)['user_id']
+            # assert user_id == project.company.creator.id     # if user that invokes deletion is a creator of a company
+        except AssertionError:
+            return Response({'message': 'Permission denied.'}, status=status.HTTP_403_FORBIDDEN)
+        task.delete()
+        return Response(
+            {
+                'message': f'Task with id {task_id} from project with id {project_id} has been successfully deleted.',
             },
             status=status.HTTP_200_OK)
