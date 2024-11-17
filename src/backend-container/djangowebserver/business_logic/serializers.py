@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from .models import Company
+from .models import Company, CompanyCustomUser
 
 class CompanyCreateSerializer(serializers.ModelSerializer):
     
@@ -15,3 +15,17 @@ class CompanyCreateSerializer(serializers.ModelSerializer):
             creator = validated_data['creator']
         )
         return user
+    
+
+class CompanyMembersSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = CompanyCustomUser
+        fields = ('user', 'company')
+
+    def create(self, validated_data):
+        obj = CompanyCustomUser.objects.create(
+            user = validated_data['user'],
+            company = validated_data['company']
+        )
+        return obj

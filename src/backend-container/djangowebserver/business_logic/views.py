@@ -8,8 +8,8 @@ from rest_framework import status
 
 from rest_framework_simplejwt.tokens import AccessToken
 
-from .serializers import CompanyCreateSerializer
-from .models import Company
+from .serializers import CompanyCreateSerializer, CompanyMembersSerializer
+from .models import Company, CompanyCustomUser
 
 class CompanyAPIView(GenericAPIView):
 
@@ -44,6 +44,7 @@ class CompanyAPIView(GenericAPIView):
             return Response(
                 {
                 'message': 'Created company successfully.',
+                'company_id': Company.objects.get(name=serializer['name'].value).id,
                 'company_data': serializer.data
                 },
                 status=status.HTTP_201_CREATED)
@@ -69,5 +70,63 @@ class CompanyAPIView(GenericAPIView):
         return Response(
             {
                 'message': f'Company with id {id} (name: {name}, description: {description}, creator_id: {creator_id}) has been successfully deleted.',
+            },
+            status=status.HTTP_200_OK)
+    
+
+class CompanyMembersAPIView(GenericAPIView):
+
+    serializer_class = CompanyMembersSerializer
+
+    def get(self, request, company_id):
+        try:
+            members = CompanyCustomUser.objects.filter(company=company_id)
+        except:
+            return Response({'message': 'Company not found.'}, status=status.HTTP_404_NOT_FOUND)
+        return Response(
+            {
+                'members': [member.user.id for member in list(members)],
+            },
+            status=status.HTTP_200_OK)
+
+    @permission_classes([IsAuthenticated])
+    def post(self, request, company_id):
+        serializer = self.serializer_class(data=request.data)
+        
+        if (serializer.is_valid(raise_exception=True)):
+            try:
+                token = request.headers['Authorization'].split()[1]
+                user_id = AccessToken(token=token)['user_id']
+                assert Company.objects.get(pk=company_id).creator.id == user_id
+                assert company_id == request.data['company']
+            except AssertionError:
+                return Response({'message': 'Permission denied. You cannot add members to this company.'}, status=status.HTTP_403_FORBIDDEN)
+
+            serializer.save()
+            return Response(
+                {
+                'message': 'User added successfully.',
+                'data': serializer.data
+                },
+                status=status.HTTP_201_CREATED)
+        
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request, company_id, member_id):
+        try:
+            company = Company.objects.get(pk=company_id)
+        except:
+            return Response({'message': 'Company not found.'}, status=status.HTTP_404_NOT_FOUND)
+        try:
+            token = request.headers['Authorization'].split()[1]
+            user_id = AccessToken(token=token)['user_id']
+            assert user_id == company.creator.id     # if user that invokes deletion is a creator of a company
+        except AssertionError:
+            return Response({'message': 'Permission denied. You cannot delete members to this company.'}, status=status.HTTP_403_FORBIDDEN)
+        companycustomuser = CompanyCustomUser.objects.get(company=company_id, user=member_id)
+        companycustomuser.delete()
+        return Response(
+            {
+                'message': f'Member {member_id} has been successfully deleted.',
             },
             status=status.HTTP_200_OK)
