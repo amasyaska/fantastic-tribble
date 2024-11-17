@@ -38,6 +38,7 @@ class UserAPIView(GenericAPIView):
             return Response(
                 {
                 'message': 'Created user successfully.',
+                'user_id': CustomUser.objects.get(username=serializer.data['username']).id,
                 'user_data': serializer.data
                 },
                 status=status.HTTP_201_CREATED)
