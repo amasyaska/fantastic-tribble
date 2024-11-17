@@ -18,14 +18,18 @@ export const SelectCompany = ({}: SelectCompanyProps) => {
 	return (
 		<Select
 			onValueChange={(value) => selectCompany(Number(value))}
-			value={selectedCompany?.toString() ?? ''}
+			value={selectedCompany === -1 ? '' : selectedCompany.toString()}
 		>
 			<SelectTrigger className='w-auto flex gap-2'>
 				<SelectValue placeholder='No company found' />
 			</SelectTrigger>
 			<SelectContent>
 				{companies?.length == 0 && (
-					<div className='p-2 text-zinc-500 text-[.9rem]'>No company found</div>
+					<>
+						<div className='p-2 text-zinc-500 text-[.9rem]'>
+							No company found
+						</div>
+					</>
 				)}
 				{companies?.map((item, index) => (
 					<SelectItem value={index.toString()} key={index}>

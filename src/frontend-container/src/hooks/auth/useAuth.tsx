@@ -4,35 +4,43 @@ import {
 	AuthLoginFormFields,
 	AuthRegistrationFormFields,
 } from '@ctypes/auth.types'
+import { useProfile } from '@hooks/user/useProfile'
 import { setTokens } from '@lib/cookieJwtTokens'
 import { authService } from '@services/auth.service'
+import { setIsLogged } from '@store/slices/authSlice'
 import { RootState } from '@store/store'
 import { useMutation } from '@tanstack/react-query'
 import { AxiosError } from 'axios'
 import { UseFormSetError } from 'react-hook-form'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'sonner'
 
 type UseAuthOptions = {
-	setError: UseFormSetError<any>
+	setError?: UseFormSetError<any>
 }
 
-export const useAuth = ({ setError }: UseAuthOptions) => {
-	const value = useSelector((state: RootState) => state.auth.value)
+export const useAuth = (options?: UseAuthOptions | undefined) => {
+	const isLogged = useSelector((state: RootState) => state.auth.value.isLogged)
 	const navigate = useNavigate()
+	const dispatch = useDispatch()
+	const { setProfile } = useProfile()
 
 	const { mutate: login, isPending: loginIsLoading } = useMutation({
 		mutationKey: ['get tokens'],
 		mutationFn: (data: AuthLoginFormFields) => authService.login(data),
 		onSuccess(data, variables, context) {
+			setProfile({
+				username: variables.username!,
+			})
 			setTokens(data.data)
+			dispatch(setIsLogged(true))
 			toast.success('Successfully!')
 			navigate(ROUTES.PROJECTS.HOME)
 		},
 		onError(error: AxiosError<AuthLoginFormFields>, variables, context) {
-			if (error.status == 400 && error.response?.data) {
-				setErrors(error.response?.data, setError)
+			if (error.status == 400 && error.response?.data && options?.setError) {
+				setErrors(error.response?.data, options.setError)
 				return
 			}
 
@@ -49,8 +57,8 @@ export const useAuth = ({ setError }: UseAuthOptions) => {
 			login(variables)
 		},
 		onError(error: AxiosError<AuthRegistrationFormFields>, variables, context) {
-			if (error.status == 400 && error.response?.data) {
-				setErrors(error.response?.data, setError)
+			if (error.status == 400 && error.response?.data && options?.setError) {
+				setErrors(error.response?.data, options.setError)
 				return
 			}
 
@@ -71,7 +79,7 @@ export const useAuth = ({ setError }: UseAuthOptions) => {
 		})
 
 	return {
-		isLogged: value != null,
+		isLogged,
 		login,
 		loginIsLoading,
 		register,

@@ -1,30 +1,20 @@
+import { getTokens } from '@lib/cookieJwtTokens'
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-
-interface AuthState {
-	accessToken: string
-	refreshToken: string
-}
-
-const initialStateValue: Partial<AuthState> = {
-	accessToken: undefined,
-	refreshToken: undefined,
-}
 
 const authSlice = createSlice({
 	name: 'auth',
-	initialState: {
-		value: initialStateValue,
-	},
-	reducers: {
-		setTokens(state, { payload }: PayloadAction<AuthState>) {
-			state.value = payload
+	initialState: () => ({
+		value: {
+			isLogged: getTokens()?.accessToken != undefined,
 		},
-		clearTokens(state) {
-			state.value = initialStateValue
+	}),
+	reducers: {
+		setIsLogged: (state, { payload }: PayloadAction<boolean>) => {
+			state.value.isLogged = payload
 		},
 	},
 })
 
-export const { setTokens, clearTokens } = authSlice.actions
+export const { setIsLogged } = authSlice.actions
 
 export const authReducer = authSlice.reducer

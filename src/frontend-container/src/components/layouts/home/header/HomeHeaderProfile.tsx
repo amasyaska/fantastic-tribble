@@ -8,6 +8,7 @@ import {
 	DropdownMenuTrigger,
 } from '@components/ui/dropdown-menu/DropdownMenu'
 import { ROUTES } from '@configs/routes.config'
+import { useProfile } from '@hooks/user/useProfile'
 import { LuLogOut, LuSettings } from 'react-icons/lu'
 import { PiAddressBookBold } from 'react-icons/pi'
 import { Link } from 'react-router-dom'
@@ -15,6 +16,8 @@ import { Link } from 'react-router-dom'
 type HomeHeaderProfileProps = {}
 
 export const HomeHeaderProfile = ({}: HomeHeaderProfileProps) => {
+	const { profile } = useProfile()
+
 	return (
 		<DropdownMenu>
 			<DropdownMenuTrigger asChild>
@@ -22,7 +25,7 @@ export const HomeHeaderProfile = ({}: HomeHeaderProfileProps) => {
 			</DropdownMenuTrigger>
 			<DropdownMenuContent align='end' className='max-w-[12rem]'>
 				<DropdownMenuLabel className='truncate'>
-					your-email@gmail.com
+					@{profile?.username}
 				</DropdownMenuLabel>
 				<DropdownMenuSeparator />
 				<DropdownMenuItem asChild>
