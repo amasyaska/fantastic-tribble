@@ -79,7 +79,7 @@ export const CreateProjectDialog = ({
 								<FormItem>
 									<FormLabel>Name</FormLabel>
 									<FormControl>
-										<Input placeholder='Anch.inc project 1' {...field} />
+										<Input placeholder='Acme.inc project 1' {...field} />
 									</FormControl>
 									<FormMessage />
 								</FormItem>

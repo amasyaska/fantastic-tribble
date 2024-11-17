@@ -22,11 +22,13 @@ export const LoginPage = () => {
 	const form = useForm<AuthLoginFormFields>({
 		resolver: zodResolver(authLoginSchema),
 		defaultValues: {
-			email: '',
+			username: '',
 			password: '',
 		},
 	})
-	const { login, loginIsLoading } = useAuth()
+	const { login, loginIsLoading } = useAuth({
+		setError: form.setError,
+	})
 
 	const onSubmit = useCallback(
 		(data: AuthLoginFormFields) => {
@@ -45,12 +47,12 @@ export const LoginPage = () => {
 					>
 						<FormField
 							control={form.control}
-							name='email'
+							name='username'
 							render={({ field }) => (
 								<FormItem>
-									<FormLabel>Email</FormLabel>
+									<FormLabel>Username</FormLabel>
 									<FormControl>
-										<Input placeholder='my-email@gmail.com' {...field} />
+										<Input placeholder='my-username' {...field} />
 									</FormControl>
 									<FormDescription>Need verifications</FormDescription>
 									<FormMessage />

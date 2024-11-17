@@ -6,6 +6,7 @@ import {
 	DropdownMenuTrigger,
 } from '@components/ui/dropdown-menu/DropdownMenu'
 import { Skeleton } from '@components/ui/skeleton/Skeleton'
+import { ROUTES } from '@configs/routes.config'
 import { ProjectType } from '@ctypes/project.types'
 import { BsThreeDotsVertical } from 'react-icons/bs'
 import { Link } from 'react-router-dom'
@@ -18,7 +19,7 @@ type ProjectItemProps = ProjectType
 export const ProjectItem = ({ id, name, description }: ProjectItemProps) => {
 	return (
 		<Link
-			to={'#'}
+			to={ROUTES.TASKS.OF_PROJECT(id)}
 			className='w-[15rem] h-[10rem] bg-zinc-100 dark:bg-zinc-900 rounded-[.4rem] p-2 relative border border-transparent hover:border-zinc-500'
 		>
 			<h3 className='text-[1rem]'>{name}</h3>

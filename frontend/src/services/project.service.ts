@@ -9,15 +9,22 @@ import { delay } from '@lib/utils'
 class ProjectService {
 	async getAll(companyId: number): Promise<ProjectType[]> {
 		await delay(500)
-		return JSON.parse(localStorage.getItem(`projects${companyId}`) ?? '[]')
+		return (
+			JSON.parse(
+				localStorage.getItem(`projects${companyId}`) ?? '[]'
+			) as ProjectType[]
+		).map((item, index) => ({
+			...item,
+			id: index,
+		}))
 	}
 
 	async create(companyId: number, data: CreateProjectFormFields) {
 		await delay(500)
-		const companies = await this.getAll(companyId)
+		const projects = await this.getAll(companyId)
 		localStorage.setItem(
 			`projects${companyId}`,
-			JSON.stringify([...companies, data])
+			JSON.stringify([...projects, data])
 		)
 	}
 

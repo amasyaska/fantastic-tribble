@@ -1,20 +1,25 @@
 import {
-	AuthCredentialsType,
 	AuthForgotPasswordFormFields,
 	AuthLoginFormFields,
 	AuthRegistrationFormFields,
 } from '@ctypes/auth.types'
+import { toSnakeCase } from '@lib/typeConverter'
 import { delay } from '@lib/utils'
+import { $api } from './api'
 
 class AuthService {
 	async register(data: AuthRegistrationFormFields) {
-		console.log(data)
-		await delay(500)
+		return $api.post(
+			'/api/v1/accounts/user/',
+			toSnakeCase({
+				...data,
+				password2: data.confirmPassword,
+			})
+		)
 	}
 
-	async getTokens(data: AuthLoginFormFields | AuthCredentialsType) {
-		console.log(data)
-		await delay(500)
+	async login(data: AuthLoginFormFields) {
+		return $api.post('/api/v1/accounts/login/', toSnakeCase(data))
 	}
 
 	async refreshTokens() {

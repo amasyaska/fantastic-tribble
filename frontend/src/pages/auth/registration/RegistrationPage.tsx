@@ -27,13 +27,18 @@ export const RegistrationPage = ({}: RegistrationPageProps) => {
 	const form = useForm<AuthRegistrationFormFields>({
 		resolver: zodResolver(authRegistrationSchema),
 		defaultValues: {
+			firstName: '',
+			lastName: '',
+			username: '',
 			email: '',
 			password: '',
 			confirmPassword: '',
 		},
 	})
 
-	const { register, registerIsLoading } = useAuth()
+	const { register, registerIsLoading } = useAuth({
+		setError: form.setError,
+	})
 
 	const onSubmit = useCallback(
 		(data: AuthRegistrationFormFields) => {

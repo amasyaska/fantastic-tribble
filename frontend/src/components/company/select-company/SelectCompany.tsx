@@ -28,7 +28,9 @@ export const SelectCompany = ({}: SelectCompanyProps) => {
 					<div className='p-2 text-zinc-500 text-[.9rem]'>No company found</div>
 				)}
 				{companies?.map((item, index) => (
-					<SelectItem value={index.toString()}>{item.name}</SelectItem>
+					<SelectItem value={index.toString()} key={index}>
+						{item.name}
+					</SelectItem>
 				))}
 			</SelectContent>
 		</Select>

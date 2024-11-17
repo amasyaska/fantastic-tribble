@@ -55,7 +55,7 @@ export const CreateCompanyForm = ({ onCreated }: CreateCompanyFormProps) => {
 						<FormItem>
 							<FormLabel>Name</FormLabel>
 							<FormControl>
-								<Input placeholder='Anch.inc' {...field} />
+								<Input placeholder='Acme.inc' {...field} />
 							</FormControl>
 							<FormMessage />
 						</FormItem>
