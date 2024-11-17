@@ -1,48 +1,55 @@
-# Документація
+# About the frontend
 
-## Сторінки
+## Pages
 
-- **Головна**: основна сторінка проєкту.
-- **Логін**: форма авторизації користувачів.
-- **Реєстрація**: форма створення нового користувача.
-- **Відновлення паролю**: функціонал для відновлення доступу до акаунту.
-- **Налаштування**: персоналізація профілю та інших параметрів.
-- **Компоненти**: реюзабельні компоненти для проєкту.
+- **Home**: The main page of the project.
+- **Login**: User authorization form.
+- **Registration**: Form for creating a new user.
+- **Password Recovery**: Functionality for recovering account access.
+- **Settings**: Personalization of profile and other parameters.
+- **Components**: Reusable components for the project.
+- **Company Management**: Page for managing company details, team members, and related projects.
+- **Projects**: Page for viewing and managing projects, including assigning team members and tracking progress.
+- **Tasks**: Page for viewing and managing tasks, including name, description and task statuses.
 
-Актуальні дані по маршутизації перевіряйте [тут](https://github.com/amasyaska/fantastic-tribble/blob/frontend/frontend/src/configs/routes.config.ts)
+Check the latest routing configuration [here](https://github.com/amasyaska/fantastic-tribble/blob/frontend/frontend/src/configs/routes.config.ts).
 
-## Технології та бібліотеки
+---
+
+## Technologies and Libraries
 
 - **React**
-- **Redux**: зберігання глобального стану
-- **TypeScript**: типізація для безпечного коду.
-- **shadcn/ui**: бібліотека для побудови UI.
-- **react-hook-form (useForm)**: для роботи з формами.
-- **axios**: для HTTP-запитів.
-- **tailwindcss**: для швидкого та зручного стилювання.
+- **Redux**: Global state management.
+- **TypeScript**: For safer and more maintainable code.
+- **shadcn/ui**: Library for building UI components.
+- **react-hook-form (useForm)**: For managing forms and validation.
+- **axios**: For HTTP requests.
+- **tailwindcss**: For rapid and flexible styling.
 
-## Структура проєкту
+---
+
+## Project Structure
 
 ```plaintext
 src/
-├── components/            # Реюзабельні компоненти інтерфейсу
-│   ├── ui/                # Компоненти UI
-│   └── layouts/           # Макети для сторінок (Header, Footer)
-├── pages/                 # Сторінки додатку
-│   ├── home/              # Головна сторінка
-│   ├── auth/              # Сторінки авторизації
-│   │   ├── login/         # Сторінка входу
-│   │   ├── register/      # Сторінка реєстрації
-│   │   └── forgotPassword/    # Сторінка відновлення паролю
-│   ├── components/        # Сторінка з відображеними компонентами (тестування)
-│   ├── user/              # Сторінки користувача
-│   │   ├── settings/      # Сторінка налаштувань
-├── configs/               # Конфігураційні файли та константи
-├── lib/                   # Наразі тут тільки утіліти (допоміжні функції)
-├── hooks/                 # React-хуки для обробки логіки елементів
-├── services/              # Сервіси для роботи з API (axios)
-├── types/                 # Типи, схеми zod та поля форм
-├── store/                 # Redux для зберігання глобального стану
-├── AppRouter.tsx          # Маршутизація
-└── App.tsx                # Головний елемент та провайдери
-```
+├── components/            # Reusable UI and layout components
+├── pages/                 # Application pages
+│   ├── home/              # Home page
+│   ├── auth/              # Authorization pages
+│   │   ├── login/         # Login page
+│   │   ├── register/      # Registration page
+│   │   └── forgotPassword/ # Password recovery page
+│   ├── components/        # Page for displaying and testing components
+│   ├── user/              # User-specific pages
+│   │   ├── settings/      # Settings page
+│   ├── company/           # Company management page
+│   ├── projects/          # Projects management page
+│   ├── tasks/             # Tasks management page
+├── configs/               # Configuration files and constants
+├── lib/                   # Utilities (helper functions)
+├── hooks/                 # React hooks for handling component logic
+├── services/              # API interaction services (axios)
+├── types/                 # Types, zod schemas, and form fields
+├── store/                 # Redux for global state management
+├── AppRouter.tsx          # Routing logic
+└── App.tsx                # Main component and providers
