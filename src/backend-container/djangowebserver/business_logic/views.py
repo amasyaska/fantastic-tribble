@@ -9,10 +9,24 @@ from rest_framework import status
 from rest_framework_simplejwt.tokens import AccessToken
 
 from .serializers import CompanyCreateSerializer
+from .models import Company
 
 class CompanyAPIView(GenericAPIView):
 
     serializer_class = CompanyCreateSerializer
+
+    def get(self, request, id):
+        try:
+            company = Company.objects.get(pk=id)
+        except:
+            return Response({'message': 'Company not found.'}, status=status.HTTP_404_NOT_FOUND)
+        return Response(
+            {
+                'id': company.id,
+                'name': company.name,
+                'description': company.description,
+            },
+            status=status.HTTP_200_OK)
 
     @permission_classes([IsAuthenticated])
     def post(self, request):
