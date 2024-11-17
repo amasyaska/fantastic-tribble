@@ -65,7 +65,7 @@ spec:
     spec:
       containers:
         - name: backend
-          image: your-backend-image:latest
+          image: ginetik/hakaton1-2024-backend:latest
           ports:
             - containerPort: 8000
           envFrom:
@@ -102,7 +102,7 @@ spec:
     spec:
       containers:
         - name: nginx
-          image: your-nginx-image:latest
+          image: ginetik/hakaton1-2024-nginx:latest
           ports:
             - containerPort: 80
 ---
