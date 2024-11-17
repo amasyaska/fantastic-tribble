@@ -2,15 +2,29 @@
 export function toCamelCase<T extends Record<string, any>>(
 	obj: T
 ): Record<string, any> {
-	const result: any = {}
+	const result: Record<string, any> = {}
+
 	for (const key in obj) {
-		if (obj.hasOwnProperty(key)) {
+		if (Object.prototype.hasOwnProperty.call(obj, key)) {
+			// Перетворення ключа в camelCase
 			const camelKey = key.replace(/_([a-z])/g, (_, letter) =>
 				letter.toUpperCase()
 			)
-			result[camelKey] = obj[key]
+
+			// Рекурсія для вкладених об'єктів
+			if (
+				obj[key] !== null &&
+				typeof obj[key] === 'object' &&
+				!Array.isArray(obj[key])
+			) {
+				result[camelKey] = toCamelCase(obj[key])
+			} else {
+				// Примітивні значення
+				result[camelKey] = obj[key]
+			}
 		}
 	}
+
 	return result
 }
 

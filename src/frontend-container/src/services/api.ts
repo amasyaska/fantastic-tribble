@@ -1,4 +1,4 @@
-import { getTokens } from '@lib/cookieJwtTokens'
+import { getTokens } from '@lib/cookieTokens'
 import axios from 'axios'
 const JWT_EXPIRED = 'jwt expired'
 const JWT_MUST_BE_PROVIDED = 'jwt must be provided'

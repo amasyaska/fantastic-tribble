@@ -9,13 +9,15 @@ import { $api } from './api'
 
 class AuthService {
 	async register(data: AuthRegistrationFormFields) {
-		return $api.post(
-			'/api/v1/accounts/user/',
-			toSnakeCase({
-				...data,
-				password2: data.confirmPassword,
-			})
-		)
+		return $api
+			.post(
+				'/api/v1/accounts/user/',
+				toSnakeCase({
+					...data,
+					password2: data.confirmPassword,
+				})
+			)
+			.then((data) => toCamelCase(data))
 	}
 
 	async login(data: AuthLoginFormFields) {

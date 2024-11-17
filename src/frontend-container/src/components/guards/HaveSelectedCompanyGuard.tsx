@@ -2,18 +2,12 @@ import { Button } from '@components/ui/button/Button'
 import { ROUTES } from '@configs/routes.config'
 import { useCompanySelect } from '@hooks/company/useCompanySelect'
 import { LuSettings } from 'react-icons/lu'
-import { Link } from 'react-router-dom'
+import { Link, Outlet } from 'react-router-dom'
 
-type HaveSelectedCompanyGuardProps = {
-	children: any
-}
-
-export const HaveSelectedCompanyGuard = ({
-	children,
-}: HaveSelectedCompanyGuardProps) => {
+export const HaveSelectedCompanyGuard = () => {
 	const { selectedCompanyId } = useCompanySelect()
 
-	if (selectedCompanyId == null)
+	if (selectedCompanyId == -1)
 		return (
 			<div className='mx-auto flex flex-col justify-center items-center gap-3 max-w-[25rem] mt-[10vh]'>
 				<h2>You don't have a company</h2>
@@ -29,5 +23,5 @@ export const HaveSelectedCompanyGuard = ({
 			</div>
 		)
 
-	return children
+	return <Outlet />
 }
