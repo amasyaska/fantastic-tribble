@@ -13,6 +13,9 @@ __pycache__
 *.db
 *.sqlite3
 
+# Docker
+db_data
+
 ### react ###
 .DS_*
 *.log
