@@ -49,3 +49,8 @@ Django, Django REST framework, SimpleJWT
    - POST | adds company member
 - /api/v1/company/{company_id}/members/{member_id}
    - DELETE | gives company members \
+- /api/v1/project/
+   - POST | creates project
+- /api/v1/project/{project_id}
+   - GET | returns project info
+   - DELETE | deletes project \
