@@ -18,9 +18,18 @@ Django, Django REST framework, SimpleJWT
 7. send your requests to ```localhost:8000```
 # endpoints
 \* – required field
-- /api/v1/accounts/user
-   - POST | create user
-     - JSON: {username*, password*, password2*, first_name*, last_name*, email*}
-- /api/v1/accounts/login
-   - POST | login user - returns JWT in format {"access_token": *access_token*, "refresh_token": *refresh_token*, ...}
-      - JSON: {username*, password*}
+- /api/v1/accounts/user/
+   - POST | create user \
+     in: {"username"\*, "password"\*, "password2"\*, "first_name"\*, "last_name"\*, "email"\*} \
+     out: {"message": *message*}
+- /api/v1/accounts/user/{id}
+   - GET | gives user info \
+     in: {} \
+     out: {"id": *id*, "username": *username*, "first_name": *first_name*, "last_name": *last_name*}
+   - DELETE | deletes user if user requests to delete his own (!) account \
+     in: {} \
+     out: {"message": *message*}
+- /api/v1/accounts/login/
+   - POST | login user - returns JWT \
+     in: {"username"\*, "password"\*} \
+     out: {"access_token": *access_token*, "refresh_token": *refresh_token*, ...}
