@@ -54,3 +54,13 @@ Django, Django REST framework, SimpleJWT
 - /api/v1/project/{project_id}
    - GET | returns project info
    - DELETE | deletes project \
+- /api/v1/project/{project_id}/task/
+   - POST | creates task
+- /api/v1/project/{project_id}/task/{task_id}
+   - GET | returns task info
+   - DELETE | deletes task \
+- /api/v1/project/{project_id}/task/{task_id}/workers/
+   - GET | returns task workers info
+   - POST | adds worker to task \
+- /api/v1/project/{project_id}/task/{task_id}/workers/{worker_id}
+   - DELETE | deletes task worker
