@@ -4,10 +4,10 @@
 This is a web application designed to streamline and automate work processes. The platform enables users to organize tasks, and collaborate effectively within companies.
 
 ## About Us
-https://github.com/amasyaska Bohdan Kolesnikov. Team Lead / backend \
-https://github.com/GineTik Denys Shevchuk Frontend / DevOps \
-https://github.com/MariiaMazur Mariia Mazur Design / frontend \
-https://github.com/vla-decr000 Vladyslav Tech lead / database developer \
+https://github.com/amasyaska Bohdan Kolesnikov | Team Lead / backend \
+https://github.com/GineTik Denys Shevchuk | Frontend / DevOps \
+https://github.com/MariiaMazur Mariia Mazur | Design / frontend \
+https://github.com/vla-decr000 Vladyslav | Tech lead / database developer
 
 ## Features
 ***Create and Manage Groups or Companies:***  
