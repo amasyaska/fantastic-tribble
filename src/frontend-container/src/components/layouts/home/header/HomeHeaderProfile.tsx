@@ -7,7 +7,9 @@ import {
 	DropdownMenuSeparator,
 	DropdownMenuTrigger,
 } from '@components/ui/dropdown-menu/DropdownMenu'
+import { Skeleton } from '@components/ui/skeleton/Skeleton'
 import { ROUTES } from '@configs/routes.config'
+import { useAuth } from '@hooks/auth/useAuth'
 import { useProfile } from '@hooks/user/useProfile'
 import { LuLogOut, LuSettings } from 'react-icons/lu'
 import { PiAddressBookBold } from 'react-icons/pi'
@@ -16,7 +18,8 @@ import { Link } from 'react-router-dom'
 type HomeHeaderProfileProps = {}
 
 export const HomeHeaderProfile = ({}: HomeHeaderProfileProps) => {
-	const { profile } = useProfile()
+	const { profile, profileIsLoading } = useProfile()
+	const { logout } = useAuth()
 
 	return (
 		<DropdownMenu>
@@ -25,7 +28,11 @@ export const HomeHeaderProfile = ({}: HomeHeaderProfileProps) => {
 			</DropdownMenuTrigger>
 			<DropdownMenuContent align='end' className='max-w-[12rem]'>
 				<DropdownMenuLabel className='truncate'>
-					@{profile?.username}
+					{profileIsLoading ? (
+						<Skeleton className='w-full h-[1rem]' />
+					) : (
+						'@' + profile?.username
+					)}
 				</DropdownMenuLabel>
 				<DropdownMenuSeparator />
 				<DropdownMenuItem asChild>
@@ -41,7 +48,7 @@ export const HomeHeaderProfile = ({}: HomeHeaderProfileProps) => {
 					</Link>
 				</DropdownMenuItem>
 				<DropdownMenuSeparator />
-				<DropdownMenuItem>
+				<DropdownMenuItem onClick={logout}>
 					<LuLogOut />
 					Logout
 				</DropdownMenuItem>

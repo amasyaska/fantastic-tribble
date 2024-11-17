@@ -1,4 +1,4 @@
-import { getTokens } from '@lib/cookieJwtTokens'
+import { getTokens } from '@lib/cookieTokens'
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 const authSlice = createSlice({

@@ -5,12 +5,19 @@ import {
 	AuthRegistrationFormFields,
 } from '@ctypes/auth.types'
 import { useProfile } from '@hooks/user/useProfile'
-import { setTokens } from '@lib/cookieJwtTokens'
+import {
+	removeTokens,
+	removeUserId,
+	setTokens,
+	setUserId,
+} from '@lib/cookieTokens'
 import { authService } from '@services/auth.service'
 import { setIsLogged } from '@store/slices/authSlice'
+import { removeProfile } from '@store/slices/profileSlice'
 import { RootState } from '@store/store'
 import { useMutation } from '@tanstack/react-query'
 import { AxiosError } from 'axios'
+import { useCallback } from 'react'
 import { UseFormSetError } from 'react-hook-form'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
@@ -30,9 +37,7 @@ export const useAuth = (options?: UseAuthOptions | undefined) => {
 		mutationKey: ['get tokens'],
 		mutationFn: (data: AuthLoginFormFields) => authService.login(data),
 		onSuccess(data, variables, context) {
-			setProfile({
-				username: variables.username!,
-			})
+			console.log(data.data)
 			setTokens(data.data)
 			dispatch(setIsLogged(true))
 			toast.success('Successfully!')
@@ -54,6 +59,9 @@ export const useAuth = (options?: UseAuthOptions | undefined) => {
 		mutationFn: (data: AuthRegistrationFormFields) =>
 			authService.register(data),
 		onSuccess(data, variables, context) {
+			console.log(data.data)
+			setUserId(data.data.userId)
+			setProfile(data.data.userData)
 			login(variables)
 		},
 		onError(error: AxiosError<AuthRegistrationFormFields>, variables, context) {
@@ -78,6 +86,13 @@ export const useAuth = (options?: UseAuthOptions | undefined) => {
 			},
 		})
 
+	const logout = useCallback(() => {
+		removeUserId()
+		removeTokens()
+		dispatch(removeProfile())
+		dispatch(setIsLogged(false))
+	}, [])
+
 	return {
 		isLogged,
 		login,
@@ -86,6 +101,7 @@ export const useAuth = (options?: UseAuthOptions | undefined) => {
 		registerIsLoading: registerIsLoading || loginIsLoading,
 		recoverPassword,
 		recoverPasswordIsLoading,
+		logout,
 	}
 }
 
