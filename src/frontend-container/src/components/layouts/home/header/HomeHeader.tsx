@@ -17,7 +17,6 @@ export const HomeHeader = ({}: HomeHeaderProps) => {
 		<div className='flex p-3 gap-10 items-center'>
 			<div className='mr-2'>Logo</div>
 			<div className='flex'>
-				<HomeHeaderLink href={ROUTES.AUTH.LOGIN}>Auth</HomeHeaderLink>
 				<HomeHeaderLink href={ROUTES.PROJECTS.HOME}>Projects</HomeHeaderLink>
 			</div>
 			<div className='ml-auto flex gap-2'>
