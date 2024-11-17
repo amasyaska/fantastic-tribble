@@ -24,10 +24,14 @@ export const useProfile = () => {
 		enabled: () => !isLoading && getUserId() != null,
 	})
 
-	const updateProfileFromServerWithId = useCallback((userId: number) => {
-		setUserId(userId)
-		queryClient.invalidateQueries({ queryKey: ['get user profile'] })
-	}, [])
+	const updateProfileFromServerWithId = useCallback(
+		(userId: number) => {
+			setUserId(userId)
+			dispatch(setIsLoading(false))
+			queryClient.invalidateQueries({ queryKey: ['get user profile'] })
+		},
+		[queryClient]
+	)
 
 	useEffect(() => {
 		if (!data) return
