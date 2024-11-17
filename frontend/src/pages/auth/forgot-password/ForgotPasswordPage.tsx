@@ -30,7 +30,9 @@ export const ForgotPasswordPage = ({}: ForgotPasswordPageProps) => {
 		},
 	})
 
-	const { recoverPassword, recoverPasswordIsLoading } = useAuth()
+	const { recoverPassword, recoverPasswordIsLoading } = useAuth({
+		setError: form.setError,
+	})
 
 	const onSubmit = useCallback(
 		(data: AuthForgotPasswordFormFields) => {

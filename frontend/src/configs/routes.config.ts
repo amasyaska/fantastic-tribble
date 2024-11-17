@@ -5,6 +5,8 @@ class Routes {
 	private workspaceScope = `${this.homeScope}workspace/`
 	private companiesScope = `${this.homeScope}companies/`
 	private projectsScope = `${this.homeScope}projects/`
+	private tasksScope = (projectId: number | string) =>
+		`${this.projectsScope}${projectId}/tasks/`
 
 	HOME = this.homeScope
 	AUTH = {
@@ -21,9 +23,8 @@ class Routes {
 	PROJECTS = {
 		HOME: `${this.projectsScope}`,
 	}
-	WORKSPACE = {
-		HOME: `${this.workspaceScope}`,
-		COMPANY_TASKS: (id: number) => `${this.workspaceScope}company/${id}`,
+	TASKS = {
+		OF_PROJECT: (projectId: number | string) => `${this.tasksScope(projectId)}`,
 	}
 	COMPONENTS = `${this.homeScope}components/`
 }

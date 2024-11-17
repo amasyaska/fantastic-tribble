@@ -7,6 +7,7 @@ import { CompaniesManagePage } from '@pages/companies/manage/CompaniesManagePage
 import { ComponentsPage } from '@pages/components/ComponentsPage'
 import { HomePage } from '@pages/home/HomePage'
 import { CompanyProjectsPage } from '@pages/projects/CompanyProjectsPage'
+import { TasksPage } from '@pages/tasks/TasksPage'
 import { SettingsPage } from '@pages/user/settings/SettingsPage'
 import { Navigate, Route, Routes } from 'react-router-dom'
 
@@ -35,6 +36,11 @@ export const AppRouter = () => {
 						<CompanyProjectsPage />
 					</HaveSelectedCompanyGuard>
 				}
+			/>
+
+			<Route
+				path={ROUTES.TASKS.OF_PROJECT(':projectId')}
+				element={<TasksPage />}
 			/>
 
 			<Route path='*' element={<Navigate to={ROUTES.HOME} replace />} />
