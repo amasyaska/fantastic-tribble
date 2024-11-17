@@ -73,7 +73,7 @@ Read the README.md file in the `src/` directory
 - /api/v1/project/{project_id}/task/{task_id}/workers/{worker_id}
    - DELETE | deletes task worker
 
-## security :
+## security 🧷
 https implementation is in ```nginx-https-setup``` branch
 copy your SSL certificate and key to nginx-container and name them "cert.crt" and "cert.key"
 
