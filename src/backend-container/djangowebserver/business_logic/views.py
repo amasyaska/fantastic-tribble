@@ -191,3 +191,16 @@ class ProjectAPIView(GenericAPIView):
                 'message': f'Project with id {project_id} has been successfully deleted.',
             },
             status=status.HTTP_200_OK)
+    
+
+class CustomUserCompaniesAPIView(GenericAPIView):
+
+    @permission_classes([IsAuthenticated])
+    def get(self, request):
+        token = request.headers['Authorization'].split()[1]
+        user_id = AccessToken(token=token)['user_id']
+        return Response(
+            {
+                'companies': [elem.company.id for elem in list(CompanyCustomUser.objects.filter(user=user_id))],
+            },
+            status=status.HTTP_200_OK)
