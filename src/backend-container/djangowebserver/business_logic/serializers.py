@@ -5,7 +5,7 @@ from .models import Company
 class CompanyCreateSerializer(serializers.ModelSerializer):
     
     class Meta:
-        model = CustomUser
+        model = Company
         fields = ('name', 'description', 'creator_id')
 
     def create(self, validated_data):
