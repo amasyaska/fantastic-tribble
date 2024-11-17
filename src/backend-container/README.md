@@ -33,3 +33,14 @@ Django, Django REST framework, SimpleJWT
    - POST | login user - returns JWT \
      in: {"username"\*, "password"\*} \
      out: {"access_token": *access_token*, "refresh_token": *refresh_token*, ...}
+- /api/v1/company/
+   - POST | creates company from current user \
+     in: {"name"\*, "description"\*, "creator"\* (creator_id)} \
+     out: {"message": *message*, "company_data": *company_data*}
+- /api/v1/company/{id}
+   - GET | gives company info \
+     in: {} \
+     out: {"id": *id*, "name": *name*, "description": *description*}
+   - DELETE | deletes company if user requests to delete his own (!) company \
+     in: {} \
+     out: {"message": *message*}
