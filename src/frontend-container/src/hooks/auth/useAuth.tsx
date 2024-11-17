@@ -45,8 +45,14 @@ export const useAuth = (options?: UseAuthOptions | undefined) => {
 			navigate(ROUTES.PROJECTS.HOME)
 		},
 		onError(error: AxiosError<AuthLoginFormFields>, variables, context) {
+			console.log(error.status)
 			if (error.status == 400 && error.response?.data && options?.setError) {
 				setErrors(error.response?.data, options.setError)
+				return
+			}
+
+			if (error.status == 401 || error.status == 404) {
+				toast.error('Email or password incorrect')
 				return
 			}
 
