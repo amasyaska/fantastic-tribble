@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     'api',
     'accounts',
     'social_accounts',
+    'business_logic',
 ]
 
 MIDDLEWARE = [
@@ -98,7 +99,7 @@ WSGI_APPLICATION = 'djangowebserver.wsgi.application'
 #     }
 # }
 
-# PostgreSQL docker
+# # PostgreSQL docker
 
 DATABASES = {
     'default': {
