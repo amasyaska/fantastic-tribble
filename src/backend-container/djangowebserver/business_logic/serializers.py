@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from .models import Company, CompanyCustomUser, Project, Task
+from .models import Company, CompanyCustomUser, Project, Task, TaskCustomUser
 
 class CompanyCreateSerializer(serializers.ModelSerializer):
     
@@ -57,5 +57,20 @@ class TaskCreateSerializer(serializers.ModelSerializer):
             description = validated_data['description'],
             project = Project.objects.get(id=self.context['project_id']),
             status = validated_data['status']
+        )
+        return obj
+    
+
+class TaskCustomUserSerializer(serializers.Serializer):
+
+    class Meta:
+        model = TaskCustomUser
+        fields = ('user', 'task')
+
+    def create(self, validated_data):
+        print(validated_data)
+        obj = TaskCustomUser.objects.create(
+            user = validated_data['user'],
+            task = validated_data['task']
         )
         return obj

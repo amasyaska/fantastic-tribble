@@ -33,3 +33,9 @@ class Task(models.Model):
     description = models.CharField(max_length=255)
     project = models.ForeignKey(Project, on_delete=models.DO_NOTHING)
     status = models.CharField(max_length=255)
+
+
+class TaskCustomUser(models.Model):
+    id = models.BigAutoField(primary_key=True, editable=False)
+    user = models.ForeignKey(CustomUser, on_delete=models.DO_NOTHING)
+    task = models.ForeignKey(Task, on_delete=models.DO_NOTHING)
