@@ -24,7 +24,7 @@ export const CompanyListItem = ({
 	const { selectCompany } = useCompanySelect()
 
 	return (
-		<div className='bg-zinc-100 dark:bg-zinc-900/50 p-3 rounded-[.4rem] flex justify-between items-start'>
+		<div className='bg-zinc-100 dark:bg-zinc-900/50 p-3 rounded-[.4rem] flex justify-between items-center'>
 			<div>
 				<h3>{name}</h3>
 				<p>{description}</p>

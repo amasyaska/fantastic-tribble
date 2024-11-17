@@ -18,19 +18,21 @@ type ProjectItemProps = ProjectType
 
 export const ProjectItem = ({ id, name, description }: ProjectItemProps) => {
 	return (
-		<Link
-			to={ROUTES.TASKS.OF_PROJECT(id)}
-			className='w-[15rem] h-[10rem] bg-zinc-100 dark:bg-zinc-900 rounded-[.4rem] p-2 relative border border-transparent hover:border-zinc-500'
-		>
-			<h3 className='text-[1rem]'>{name}</h3>
-			<p className='text-[.9rem] text-zinc-600 dark:text-zinc-300'>
-				{description}
-			</p>
+		<div className='relative'>
+			<Link
+				to={ROUTES.TASKS.OF_PROJECT(id)}
+				className='w-[15rem] h-[10rem] bg-zinc-100 dark:bg-zinc-900 rounded-[.4rem] p-2 relative border border-transparent hover:border-zinc-500 block'
+			>
+				<h3 className='text-[1rem] leading-relaxed'>{name}</h3>
+				<p className='text-[.9rem] text-zinc-600 dark:text-zinc-300'>
+					{description}
+				</p>
+			</Link>
 			<DropdownMenu>
 				<DropdownMenuTrigger asChild>
 					<Button
 						variant='ghost'
-						size='icon'
+						size='icon_sm'
 						className='absolute top-0 right-0 m-2'
 					>
 						<BsThreeDotsVertical />
@@ -50,7 +52,7 @@ export const ProjectItem = ({ id, name, description }: ProjectItemProps) => {
 					<RemoveProjectDialog projectId={id} />
 				</DropdownMenuContent>
 			</DropdownMenu>
-		</Link>
+		</div>
 	)
 }
 

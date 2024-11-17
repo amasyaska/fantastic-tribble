@@ -2,6 +2,8 @@ FROM node:18-alpine AS build
 
 WORKDIR /app
 
+ENV NODE_ENV=production
+
 COPY package*.json ./
 
 RUN npm install
@@ -17,6 +19,8 @@ WORKDIR /app
 RUN npm install -g serve
 
 COPY --from=build /app/build /app/build
+
+ENV NODE_ENV=production
 
 EXPOSE 3000
 
