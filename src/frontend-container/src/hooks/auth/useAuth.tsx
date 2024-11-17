@@ -31,14 +31,15 @@ export const useAuth = (options?: UseAuthOptions | undefined) => {
 	const isLogged = useSelector((state: RootState) => state.auth.value.isLogged)
 	const navigate = useNavigate()
 	const dispatch = useDispatch()
-	const { setProfile } = useProfile()
+	const { setProfile, updateProfileFromServerWithId } = useProfile()
 
 	const { mutate: login, isPending: loginIsLoading } = useMutation({
 		mutationKey: ['get tokens'],
 		mutationFn: (data: AuthLoginFormFields) => authService.login(data),
 		onSuccess(data, variables, context) {
-			console.log(data.data)
-			setTokens(data.data)
+			console.log(data.data.userId, data.data.data)
+			setTokens(data.data.data)
+			updateProfileFromServerWithId(data.data.userId)
 			dispatch(setIsLogged(true))
 			toast.success('Successfully!')
 			navigate(ROUTES.PROJECTS.HOME)
@@ -59,7 +60,6 @@ export const useAuth = (options?: UseAuthOptions | undefined) => {
 		mutationFn: (data: AuthRegistrationFormFields) =>
 			authService.register(data),
 		onSuccess(data, variables, context) {
-			console.log(data.data)
 			setUserId(data.data.userId)
 			setProfile(data.data.userData)
 			login(variables)

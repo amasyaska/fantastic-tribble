@@ -4,24 +4,28 @@ import {
 	CreateCompanyFormFields,
 	EditCompanyFormFields,
 } from '@ctypes/company.types'
+import { getUserId } from '@lib/cookieTokens'
+import { toCamelCase, toSnakeCase } from '@lib/typeConverter'
 import { delay } from '@lib/utils'
+import { $api } from './api'
 
 class CompanyService {
 	async getAll(): Promise<CompanyType[]> {
-		await delay(500)
-		return (
-			JSON.parse(localStorage.getItem('companies') ?? '[]') as CompanyType[]
-		).map((item, index) => ({
-			...item,
-			id: index,
-		}))
+		return $api
+			.get('/api/v1/my_companies/')
+			.then((data) => data.data.map((item: any) => toCamelCase(item)))
 	}
 
 	async create(data: CreateCompanyFormFields) {
-		await delay(500)
-		const companies = await this.getAll()
-		localStorage.setItem('companies', JSON.stringify([...companies, data]))
-		return companies.length
+		return $api
+			.post(
+				'/api/v1/company/',
+				toSnakeCase({
+					...data,
+					creator: getUserId(),
+				})
+			)
+			.then((data) => toCamelCase(data))
 	}
 
 	async remove(id: number) {
