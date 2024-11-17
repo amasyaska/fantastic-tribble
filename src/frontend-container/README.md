@@ -12,7 +12,7 @@
 - **Projects**: Page for viewing and managing projects, including assigning team members and tracking progress.
 - **Tasks**: Page for viewing and managing tasks, including name, description and task statuses.
 
-Check the latest routing configuration [here](/src/configs/routes.config.ts).
+Check the latest routing configuration [here](/src/frontend-container/src/configs/routes.config.ts).
 
 ## Technologies and Libraries
 
